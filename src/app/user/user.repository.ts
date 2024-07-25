@@ -29,7 +29,7 @@ export class UserRepository extends Repository<User> {
       this.dataSource,
       this.logger,
       async (queryRunner) => {
-        let user: User;
+        let user: User | null;
         user = await queryRunner.manager.findOne(User, {
           where: { ...userInfo },
         });

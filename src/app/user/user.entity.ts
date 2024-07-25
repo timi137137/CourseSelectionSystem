@@ -7,7 +7,6 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
-import { File } from '../files/files.entity';
 import { Role } from './user.dto';
 
 @Entity()
@@ -39,10 +38,6 @@ export class User {
   // 机器码
   @Column('varchar', { nullable: true })
   Machine_Code?: string;
-
-  // 用户所有文件
-  @OneToMany(() => File, (file) => file.User)
-  Files: File[];
 
   // 过期日期
   @Column('datetime', { nullable: true })

@@ -6,7 +6,6 @@ import {
   Logger,
   NotFoundException,
 } from '@nestjs/common';
-import ms, { StringValue } from 'ms';
 
 import { UserSignInDto } from '../auth/auth.dto';
 import { Role, UserCreateDto } from './user.dto';
@@ -62,24 +61,6 @@ export class UserService {
     } else {
       this.logger.error(`User block failed: ${userID}`);
       throw new InternalServerErrorException('User block failed');
-    }
-  }
-
-  async deferUser(userID: string, time: StringValue) {
-    this.logger.debug(`User ${userID} want to defer expiration date: ${time}`);
-
-    const user = await this.userRepository.SearchUser({ UID: userID });
-    if (!user) throw new NotFoundException('User not found');
-
-    user.Expiration_Date.setTime(user.Expiration_Date.getTime() + ms(time));
-
-    if (await this.userRepository.UpdateUser(user)) {
-      return;
-    } else {
-      this.logger.error(`User ${userID} defer expiration date failed`);
-      throw new InternalServerErrorException(
-        'User defer expiration date failed',
-      );
     }
   }
 
