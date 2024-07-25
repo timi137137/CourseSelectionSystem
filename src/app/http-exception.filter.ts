@@ -7,7 +7,6 @@ import {
   Inject,
   Logger,
 } from '@nestjs/common';
-import { getClientIp } from '@supercharge/request-ip';
 import { FastifyReply, FastifyRequest } from 'fastify';
 
 import { transformJson } from '../utils/tools';
@@ -36,7 +35,7 @@ export class HttpExceptionFilter implements ExceptionFilter {
         request.method
       }\n\tStatus code: ${status}\n\tRequest original url: ${
         request.originalUrl
-      }\n\tIP: ${getClientIp(request) ?? 'None IP'}\n\tParams: ${
+      }\n\tIP: None IP\n\tParams: ${
         transformJson(request.params) ?? 'None Params'
       }\n\tQuery: ${transformJson(request.query) ?? 'None Query'}\n\tBody: ${
         transformJson(request.body) ?? 'None Body'
