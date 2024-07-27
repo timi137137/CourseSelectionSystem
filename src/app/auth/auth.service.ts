@@ -43,7 +43,7 @@ export class AuthService {
     );
 
     await this.cacheManager.set(
-      `Token_${user.ID?.toString()}`,
+      `Token_${user.UID?.toString()}`,
       token,
       this.config.get<number>('JWT_EXPIRES_IN'),
     );
