@@ -1,13 +1,10 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Type } from 'class-transformer';
 import {
-  IsDate,
   IsEnum,
   IsNotEmpty,
   IsOptional,
   IsString,
   Length,
-  MinDate,
 } from 'class-validator';
 
 export enum Role {
@@ -45,48 +42,6 @@ export class UserDto {
   })
   @IsOptional()
   Role?: Role;
-
-  @ApiProperty({
-    description: 'IP地址',
-    type: String,
-  })
-  @IsOptional()
-  IP?: string;
-
-  @ApiProperty({
-    description: '机器码',
-    type: String,
-  })
-  @IsOptional()
-  Machine_Code?: string;
-
-  @ApiProperty({
-    description: '过期时间',
-    type: Date,
-  })
-  @IsOptional()
-  Expiration_Date?: Date;
-
-  @ApiProperty({
-    description: '最后上线日期',
-    type: Date,
-  })
-  @IsOptional()
-  Last_Login_Date?: Date;
-
-  @ApiProperty({
-    description: '账户创建时间',
-    type: Date,
-  })
-  @IsOptional()
-  Created_Date?: Date;
-
-  @ApiProperty({
-    description: '被删除时间',
-    type: Date,
-  })
-  @IsOptional()
-  Deleted_Date?: Date;
 }
 
 export class UserCreateDto {
@@ -115,16 +70,6 @@ export class UserCreateDto {
   @IsNotEmpty()
   @IsEnum(Role)
   Role: Role;
-
-  @ApiProperty({
-    description: '过期时间',
-    type: Date,
-  })
-  @IsNotEmpty()
-  @IsDate()
-  @MinDate(new Date())
-  @Type(() => Date)
-  Expiration_Date: Date;
 }
 
 export class UserPayload {
@@ -133,6 +78,7 @@ export class UserPayload {
     type: Number,
   })
   sub: number;
+
   @ApiProperty({
     description: '用户名',
     type: String,

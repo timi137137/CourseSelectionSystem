@@ -46,8 +46,8 @@ export async function Bootstrap() {
           info.level != 'info'
             ? info.level == 'error'
               ? `${info.level}: ${[info.timestamp]}: ${info.message} \n${
-                info.stack
-              }`
+                  info.stack
+                }`
               : `${info.level}: ${[info.timestamp]}: ${info.message}`
             : '',
         ),
